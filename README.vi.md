@@ -187,6 +187,13 @@ SkillLint không phải công cụ duy nhất; hãy chọn cái phù hợp:
 
 Trọng tâm của SkillLint: ma trận tương thích mà mỗi quy tắc đều dẫn nguồn chính thức, `--target` để kiểm tra đúng agent cần hỗ trợ, manifest plugin/marketplace của Claude Code, các bẫy trên Windows, và không phụ thuộc thư viện.
 
+## 🔗 Dự án khác
+
+- **[ControlPhone](https://github.com/mahiepit/ControlPhone)**: điều khiển nhiều điện thoại Android cùng lúc, xem màn hình trực tiếp
+- **[ChuotVan](https://github.com/mahiepit/ChuotVan)**: biến văn AI, văn dịch máy thành tiếng Việt tự nhiên
+- **[DiaChiMoi](https://github.com/mahiepit/DiaChiMoi)**: chuyển địa chỉ cũ sang đơn vị hành chính mới sau sáp nhập 2025
+- **[PaperViet](https://github.com/mahiepit/PaperViet)**: đọc bài báo khoa học tiếng Anh bằng tiếng Việt
+
 ## ❤️ Ủng hộ dự án
 
 SkillLint miễn phí và sẽ luôn miễn phí. Nếu công cụ giúp bạn tiết kiệm thời gian, một khoản ủng hộ sẽ giúp dự án được duy trì và phát triển. Xin cảm ơn!

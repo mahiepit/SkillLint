@@ -202,6 +202,13 @@ SkillLint is not the only tool; pick what fits:
 
 SkillLint's focus: a portability matrix where every rule cites official docs, `--target` to tailor checks, Claude Code plugin/marketplace manifests, Windows pitfalls, and zero dependencies.
 
+## 🔗 More projects
+
+- **[ControlPhone](https://github.com/mahiepit/ControlPhone)**: control many Android phones at once from your PC
+- **[ChuotVan](https://github.com/mahiepit/ChuotVan)**: turn AI-sounding Vietnamese into natural Vietnamese
+- **[DiaChiMoi](https://github.com/mahiepit/DiaChiMoi)**: convert old Vietnamese addresses to the 2025 administrative units
+- **[PaperViet](https://github.com/mahiepit/PaperViet)**: read English research papers in Vietnamese
+
 ## ❤️ Support the project
 
 SkillLint is free and always will be. If it saves you time, a donation keeps it maintained and improving. Thank you!
