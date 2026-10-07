@@ -1,6 +1,6 @@
 {
   "name": "skilllint",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Lint Agent Skills (SKILL.md) for validity and portability across Claude Code, Codex, Cursor, Gemini CLI and Copilot, plus Claude Code plugin manifests.",
   "type": "module",
   "bin": {

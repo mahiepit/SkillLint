@@ -3,13 +3,21 @@
 // the working tree on Windows (where checkouts convert LF to CRLF and the
 // executable bit does not exist).
 import { spawnSync } from 'node:child_process';
+import fs from 'node:fs';
 import path from 'node:path';
 
 const rootCache = new Map();
 const indexCache = new Map();
 
+// Canonical path for map keys. realpath expands Windows 8.3 short names
+// (C:\Users\RUNNER~1\...) and symlinks, which `git rev-parse` always returns expanded.
 function norm(p) {
-  const r = path.resolve(p);
+  let r = path.resolve(p);
+  try {
+    r = fs.realpathSync.native(r);
+  } catch {
+    // Not on disk: keep the resolved path.
+  }
   return process.platform === 'win32' ? r.toLowerCase() : r;
 }
 
