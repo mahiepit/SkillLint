@@ -1,6 +1,6 @@
 {
   "name": "skilllint",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Write and lint Agent Skills (SKILL.md) that load and trigger in Claude Code, Codex, Cursor, Gemini CLI and Copilot.",
   "author": {
     "name": "Thảo Gia",

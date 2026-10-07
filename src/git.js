@@ -38,8 +38,16 @@ export function repoRoot(dir) {
     rootCache.set(key, null);
     return null;
   }
-  const out = git(['rev-parse', '--show-toplevel'], dir);
-  const root = out ? path.resolve(out.trim()) : null;
+  // Walk up to the nearest `.git` (a directory, or a file in worktrees and
+  // submodules) instead of spawning `git rev-parse` for every directory.
+  let root = null;
+  for (let d = path.resolve(dir); ; d = path.dirname(d)) {
+    if (fs.existsSync(path.join(d, '.git'))) {
+      root = d;
+      break;
+    }
+    if (path.dirname(d) === d) break;
+  }
   rootCache.set(key, root);
   return root;
 }

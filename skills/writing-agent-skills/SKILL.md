@@ -5,7 +5,7 @@ license: MIT
 compatibility: Linting needs Node.js 18+ (npx downloads SkillLint from GitHub on first use)
 metadata:
   author: mahiepit
-  version: "1.0.1"
+  version: "1.0.2"
 ---
 
 # Writing and linting Agent Skills
