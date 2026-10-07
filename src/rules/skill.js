@@ -30,7 +30,9 @@ const WINDOWS_SCRIPT_EXT = new Set(['.ps1', '.bat', '.cmd']);
 const MONTHS = 'January|February|March|April|May|June|July|August|September|October|November|December';
 const TIME_SENSITIVE_RE = new RegExp(`\\b(?:before|after|until|since|as of|starting|from)\\s+(?:(?:${MONTHS})\\s+(?:\\d{1,2},?\\s+)?\\d{4}|Q[1-4]\\s+\\d{4}|\\d{4}\\b)`, 'i');
 const TRIGGER_RE = /\b(use (it |this( skill)? )?(when|for|if|whenever|to|on|with|during|after|before)|when(ever)? (the )?(user|you|asked|working|handling|dealing|editing|creating|writing|reviewing|debugging|building|running|someone|a user|an? )|when\b.*\b(asks?|needs?|wants?|mentions?|requests?)|trigger(s|ed)?\b|invoke(d)? (when|for|if)|if the user|for (tasks|requests|questions|work) |applies (when|to))/i;
-const PERSON_RE = /^\s*(I|I'm|I'll|I've|I can|We|We'll|We can|You|You can|You'll|Your|Let me|My|This skill (helps|lets) you)\b|\b(I can help|I will|I'll help|I am able|you can use this|let me help|helps you)\b/i;
+// Trigger phrases in other languages (Vietnamese, Chinese, Japanese, Korean, Spanish, Portuguese, French, German).
+const TRIGGER_I18N_RE = /(dùng khi|sử dụng khi|khi người dùng|khi cần|当用户|當用戶|用于|用於|适用于|適用於|場合に|ときに|時に|때 사용|경우에 사용|úsal[oa] cuando|usar cuando|cuando el usuario|use quando|usar quando|quando o usuário|utiliser (quand|lorsque)|lorsque l'utilisateur|quand l'utilisateur|verwenden,? wenn|wenn der (Benutzer|Nutzer))/i;
+const PERSON_RE =/^\s*(I|I'm|I'll|I've|I can|We|We'll|We can|You|You can|You'll|Your|Let me|My|This skill (helps|lets) you)\b|\b(I can help|I will|I'll help|I am able|you can use this|let me help|helps you)\b/i;
 const XML_TAG_RE = /<\/?[A-Za-z][\w:.-]*(\s[^<>]*)?\/?>/;
 const DISABLE_RE = /<!--\s*skilllint-disable(?:\s+([\w\s,-]*?))?\s*-->/g;
 
@@ -404,7 +406,7 @@ function checkDescription(data, ctx, R, loc, fm) {
       hint: 'Say what it does and when to use it, with the keywords users would say, e.g. "Extracts text and tables from PDF files. Use when working with PDFs or forms."',
     });
   }
-  if (!TRIGGER_RE.test(d)) {
+  if (!TRIGGER_RE.test(d) && !TRIGGER_I18N_RE.test(d)) {
     R('description-no-trigger', {
       ...at,
       message: '`description` says what the skill does but not when to use it.',

@@ -280,7 +280,7 @@ Sources: [Agent Skills spec](https://agentskills.io/specification) · [Claude be
 
 **warning** · all targets
 
-The description says what the skill does but not when to use it. Every vendor asks for both: "Describes what the skill does and when to use it" (spec), "Use when ..." (Claude), "Explain when this skill should and should not trigger" (Codex). SkillLint looks for phrases like "Use when", "Use for", "when the user", "if the user", "whenever".
+The description says what the skill does but not when to use it. Every vendor asks for both: "Describes what the skill does and when to use it" (spec), "Use when ..." (Claude), "Explain when this skill should and should not trigger" (Codex). SkillLint looks for phrases like "Use when", "Use for", "when the user", "if the user", "whenever", and their equivalents in Vietnamese ("Dùng khi"), Chinese ("当用户", "用于"), Japanese ("場合に"), Korean ("때 사용"), Spanish, Portuguese, French and German.
 
 Sources: [Agent Skills spec](https://agentskills.io/specification) · [Claude best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) · [Codex](https://learn.chatgpt.com/docs/build-skills) · [Gemini CLI](https://geminicli.com/docs/cli/creating-skills/)
 

@@ -79,6 +79,10 @@ test('vague names and descriptions', () => {
   assert.deepEqual(lintFixture('vague').ids, ['description-no-trigger', 'description-too-short', 'name-vague']);
 });
 
+test('trigger phrases in other languages count as a trigger', () => {
+  assert.ok(!lintFixture('i18n-trigger').ids.includes('description-no-trigger'));
+});
+
 test('description-person and description-xml-tags', () => {
   assert.deepEqual(lintFixture('person').ids, ['description-person']);
   assert.deepEqual(lintFixture('xml-desc').ids, ['description-xml-tags']);
