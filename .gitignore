@@ -1,0 +1,8 @@
+node_modules/
+coverage/
+*.log
+*.sarif
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

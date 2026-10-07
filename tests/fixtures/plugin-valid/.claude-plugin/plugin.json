@@ -1,0 +1,18 @@
+{
+  "name": "hello-tools",
+  "version": "1.2.0",
+  "description": "Greeting skills for testing",
+  "author": {
+    "name": "Example Team",
+    "url": "https://example.com"
+  },
+  "homepage": "https://example.com/hello-tools",
+  "repository": "https://github.com/example/hello-tools",
+  "license": "MIT",
+  "keywords": [
+    "greeting"
+  ],
+  "commands": [
+    "./commands/hello.md"
+  ]
+}

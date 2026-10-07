@@ -1,0 +1,72 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: node ${{ matrix.node }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Unit tests
+        run: npm test
+      - name: Lint this repository with the CLI (dogfood)
+        run: node bin/skilllint.js . --strict
+      - name: The CLI fails on an invalid fixture
+        shell: bash
+        run: |
+          set +e
+          node bin/skilllint.js tests/fixtures/invalid-yaml
+          code=$?
+          if [ "$code" -ne 1 ]; then echo "expected exit code 1, got $code"; exit 1; fi
+
+  action:
+    name: GitHub Action (dogfood)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint skills and plugin manifests with the local action
+        id: skilllint
+        uses: ./
+        with:
+          path: .
+          strict: "true"
+          sarif: skilllint.sarif
+      - name: Check outputs
+        shell: bash
+        env:
+          ERRORS: ${{ steps.skilllint.outputs.errors }}
+          WARNINGS: ${{ steps.skilllint.outputs.warnings }}
+        run: |
+          echo "errors=$ERRORS warnings=$WARNINGS"
+          test "$ERRORS" = "0"
+          test -s skilllint.sarif
+      - name: The action reports annotations for a broken skill
+        id: broken
+        continue-on-error: true
+        uses: ./
+        with:
+          path: tests/fixtures/links
+      - name: Expect the broken fixture to fail
+        shell: bash
+        env:
+          OUTCOME: ${{ steps.broken.outcome }}
+          ERRORS: ${{ steps.broken.outputs.errors }}
+        run: |
+          test "$OUTCOME" = "failure"
+          test "$ERRORS" -gt 0

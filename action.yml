@@ -1,0 +1,77 @@
+name: SkillLint
+description: Lint Agent Skills (SKILL.md) and Claude Code plugin manifests for validity and portability across coding agents.
+author: Thảo Gia
+branding:
+  icon: check-square
+  color: purple
+
+inputs:
+  path:
+    description: Space-separated files or directories to lint (skill folders, skills/ dirs or the whole repo).
+    required: false
+    default: "."
+  target:
+    description: Comma-separated agents to check for (claude, codex, cursor, gemini, copilot, spec) or "all".
+    required: false
+    default: ""
+  strict:
+    description: Fail on warnings as well as errors ("true" / "false").
+    required: false
+    default: "false"
+  max-warnings:
+    description: Fail when there are more than this many warnings (empty = no limit).
+    required: false
+    default: ""
+  sarif:
+    description: Also write a SARIF report to this file (for github/codeql-action/upload-sarif).
+    required: false
+    default: ""
+  args:
+    description: Extra command-line arguments passed to skilllint (e.g. "--rule unreferenced-file=off --ignore vendor/**").
+    required: false
+    default: ""
+  node-version:
+    description: Node.js version to set up. Leave empty to use the Node.js already on the runner (>= 18).
+    required: false
+    default: ""
+
+outputs:
+  errors:
+    description: Number of errors found.
+    value: ${{ steps.lint.outputs.errors }}
+  warnings:
+    description: Number of warnings found.
+    value: ${{ steps.lint.outputs.warnings }}
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Node.js
+      if: ${{ inputs.node-version != '' }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Run SkillLint
+      id: lint
+      shell: bash
+      env:
+        SKILLLINT_PATH: ${{ inputs.path }}
+        SKILLLINT_TARGET: ${{ inputs.target }}
+        SKILLLINT_STRICT: ${{ inputs.strict }}
+        SKILLLINT_MAX_WARNINGS: ${{ inputs.max-warnings }}
+        SKILLLINT_SARIF: ${{ inputs.sarif }}
+        SKILLLINT_ARGS: ${{ inputs.args }}
+        SKILLLINT_BIN: ${{ github.action_path }}/bin/skilllint.js
+      run: |
+        set -f  # no glob expansion of paths or args
+        cmd=(node "$SKILLLINT_BIN" --format github)
+        if [ -n "$SKILLLINT_TARGET" ]; then cmd+=(--target "$SKILLLINT_TARGET"); fi
+        if [ "$SKILLLINT_STRICT" = "true" ]; then cmd+=(--strict); fi
+        if [ -n "$SKILLLINT_MAX_WARNINGS" ]; then cmd+=(--max-warnings "$SKILLLINT_MAX_WARNINGS"); fi
+        if [ -n "$SKILLLINT_SARIF" ]; then cmd+=(--sarif "$SKILLLINT_SARIF"); fi
+        # shellcheck disable=SC2206
+        extra=($SKILLLINT_ARGS)
+        # shellcheck disable=SC2206
+        paths=($SKILLLINT_PATH)
+        "${cmd[@]}" "${extra[@]}" -- "${paths[@]}"

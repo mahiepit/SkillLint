@@ -1,0 +1,10 @@
+{
+  "name": "My Plugin",
+  "author": "Someone",
+  "homepage": "not a url",
+  "keywords": "one,two",
+  "commands": ["commands/foo.md"],
+  "agents": ["./agents/missing.md"],
+  "skills": ["./../outside"],
+  "colour": "blue"
+}

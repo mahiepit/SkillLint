@@ -1,0 +1,21 @@
+{
+  "name": "hello-market",
+  "description": "Plugins for greeting people",
+  "owner": {
+    "name": "Example Team"
+  },
+  "plugins": [
+    {
+      "name": "hello-tools",
+      "source": "./",
+      "description": "Greeting skills"
+    },
+    {
+      "name": "remote-tool",
+      "source": {
+        "source": "github",
+        "repo": "example/remote-tool"
+      }
+    }
+  ]
+}

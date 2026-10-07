@@ -1,0 +1,12 @@
+{
+  "name": "claude-plugins-official",
+  "owner": {},
+  "plugins": [
+    { "name": "a", "source": "plugins/a" },
+    { "name": "a", "source": "./missing" },
+    { "name": "b", "source": "./../outside" },
+    { "name": "bad name", "source": { "source": "github", "repo": "bad" } },
+    { "name": "d", "source": { "source": "svn", "url": "x" } }
+  ],
+  "extra": true
+}

@@ -1,0 +1,57 @@
+{
+  "name": "skilllint",
+  "version": "1.0.0",
+  "description": "Lint Agent Skills (SKILL.md) for validity and portability across Claude Code, Codex, Cursor, Gemini CLI and Copilot, plus Claude Code plugin manifests.",
+  "type": "module",
+  "bin": {
+    "skilllint": "bin/skilllint.js"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "docs/RULES.md",
+    "action.yml",
+    "README.md",
+    "README.vi.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "lint:self": "node bin/skilllint.js .",
+    "rules": "node bin/skilllint.js --list-rules"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "agent-skills",
+    "skill-md",
+    "skills",
+    "linter",
+    "lint",
+    "claude-code",
+    "claude-plugin",
+    "codex",
+    "cursor",
+    "gemini-cli",
+    "github-copilot",
+    "github-action",
+    "sarif",
+    "ai-agents"
+  ],
+  "author": "Thảo Gia",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mahiepit/SkillLint.git"
+  },
+  "homepage": "https://github.com/mahiepit/SkillLint#readme",
+  "bugs": {
+    "url": "https://github.com/mahiepit/SkillLint/issues"
+  }
+}

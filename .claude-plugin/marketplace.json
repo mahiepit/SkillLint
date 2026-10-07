@@ -1,0 +1,17 @@
+{
+  "name": "skilllint",
+  "description": "SkillLint: write and lint portable Agent Skills (SKILL.md) for Claude Code, Codex, Cursor, Gemini CLI and Copilot.",
+  "owner": {
+    "name": "Thảo Gia",
+    "url": "https://github.com/mahiepit"
+  },
+  "plugins": [
+    {
+      "name": "skilllint",
+      "source": "./",
+      "description": "A skill that teaches the agent to write SKILL.md files and lint them with the SkillLint CLI.",
+      "category": "development",
+      "tags": ["agent-skills", "lint", "skills"]
+    }
+  ]
+}
